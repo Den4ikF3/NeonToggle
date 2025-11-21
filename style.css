@@ -1,0 +1,104 @@
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #36393F;
+    font-family: sans-serif;
+}
+
+.toggle-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-label {
+    position: relative;
+    width: 100px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #2E3035;
+    cursor: pointer;
+    
+    box-shadow: inset 4px 4px 8px #25272b, 
+                inset -4px -4px 8px #43474F;
+    
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.toggle-knob {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    
+    background: linear-gradient(145deg, #3a3d44, #303238);
+    box-shadow: 4px 4px 8px #25272b, 
+                -4px -4px 8px #43474F;
+    
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
+}
+
+.indicator-light {
+    position: absolute;
+    top: 50%;
+    left: -25px;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    
+    background-color: #ff4d4d;
+    box-shadow: 0 0 5px #ff4d4d, 
+                0 0 10px #ff4d4d;
+    
+    transition: all 0.3s ease;
+}
+
+.toggle-label::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: 27px;
+    
+    box-shadow: 
+        0 0 0 2px var(--neon-color-inner, transparent),
+        0 0 15px 5px var(--neon-color-outer, transparent);
+    
+    --neon-color-inner: transparent;
+    --neon-color-outer: transparent;
+
+    transition: box-shadow 0.3s ease;
+}
+
+
+.toggle-input:checked + .toggle-label .toggle-knob {
+    transform: translateX(50px);
+    opacity: 0;
+}
+
+.toggle-input:checked + .toggle-label {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.toggle-input:checked + .toggle-label::after {
+    --neon-color-inner: #00ff7f;
+    --neon-color-outer: #00c6ff;
+}
+
+.toggle-input:checked ~ .indicator-light {
+    background-color: #00ff7f;
+    box-shadow: 0 0 10px #00ff7f, 
+                0 0 20px #00ff7f;
+}
